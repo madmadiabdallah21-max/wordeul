@@ -1,0 +1,124 @@
+
+html, 
+body {
+    margin: 0;
+    height: 100vh;
+
+}
+
+#game {
+    position: relative;
+    display: flex;
+    border: 5px solid var(--primary-color);
+    flex-direction: column;
+    user-select: none;
+    gap: 4px;
+    visibility: hidden;
+
+    
+}
+
+
+.row {
+    display: flex;
+    gap: 2px;
+    
+}
+
+.tile {
+    position: relative;
+    display: flex;
+    width: 70px;
+    height: 70px;
+    border: 1px solid black;
+    border-radius: 8px;
+    font-size: 2em;
+    text-align: center;
+    align-items: center;
+    justify-content: space-around;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--primary-color);
+}
+
+.tile.correct {
+    background-color: green;
+    color: white;
+    text-shadow: 
+    -1px -1px 0 black,  
+     1px -1px 0 black,
+    -1px  1px 0 black,
+     1px  1px 0 black;
+}
+
+.tile.present {
+    background-color: yellow;
+    color: white;
+    text-shadow: 
+    -1px -1px 0 black,  
+     1px -1px 0 black,
+    -1px  1px 0 black,
+     1px  1px 0 black;
+}
+
+#keyboard {
+    display: flex;
+    width: 600px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    
+}
+
+.keyboard-key {
+    height: 50px;
+    width: 60px;
+    gap: 4px;
+    border-radius: 4px;
+    background-color: wheat;
+    cursor: pointer;
+}
+
+.keyboard-key.enter {
+    width: auto;
+}
+
+.keyboard-key:hover {
+    background-color: var(--secondary-color);
+}
+
+.keyboard-key.backspace {
+    width: auto;
+}
+
+.keyboard-key.correct {
+    background-color: green;
+    color: white;
+    text-shadow: 
+    -1px -1px 0 black,  
+     1px -1px 0 black,
+    -1px  1px 0 black,
+     1px  1px 0 black;
+}
+
+.keyboard-key.present {
+    background-color: yellow;
+    color: white;
+    text-shadow: 
+    -1px -1px 0 black,  
+     1px -1px 0 black,
+    -1px  1px 0 black,
+     1px  1px 0 black;
+}
+
+#game.notFound {
+    animation: horizontal-shaking 0.5s;
+}
+
+@keyframes horizontal-shaking {
+    0% { transform: translateX(0) }
+    25% { transform: translateX(5px) }
+    50% { transform: translateX(-5px) }
+    75% { transform: translateX(5px) }
+    100% { transform: translateX(0) }
+    }

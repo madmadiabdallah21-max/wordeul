@@ -1,0 +1,60 @@
+#container {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: auto auto auto;
+    column-gap: 100px;
+    visibility: visible;
+    grid-template-areas:
+        "adLeft main adRight";
+    
+}
+
+
+aside {
+    grid-area: adLeft;
+}
+
+main {
+    grid-area: main;
+}
+
+
+
+
+#ad {
+    height: 100%;
+    background-image: url("../images/cafe.png");
+    color: white;
+    font-family: fantasy;
+    place-content: center;
+    font-size: 1.5em;
+
+}
+
+.boxInt {
+    grid-area: main;
+    width: 900px;
+}
+
+.boxGame {
+    display: flex;
+    position: relative;
+    grid-area: main;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    top: 100px;
+}
+
+#ad.right {
+    grid-area: adRight;
+}
+
+.adText {
+    left: 10px;
+}
+
+.adText2 {
+    left: 25px;
+}
