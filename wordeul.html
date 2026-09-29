@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="theme-color" content="#10141d">
+    <meta name="description" content="Wordeul, le jeu de lettres à jouer directement dans votre navigateur.">
+    <title>Wordeul — Jeu de lettres</title>
     <link rel="stylesheet" href="style/wordeul.css">
     <link rel="stylesheet" href="style/modal.css">
     <link rel="stylesheet" href="style/formulaire.css">
@@ -20,31 +22,41 @@
                 <div class="adText2">      Testez cafeIN, meilleur qu'un café</div>
         </aside>
         <main>
+            <header class="site-header">
+                <div class="brand-mark" aria-hidden="true">W</div>
+                <div class="brand-copy">
+                    <h1>Wordeul</h1>
+                    <p>Devinez le mot de six lettres, une tentative à la fois.</p>
+                </div>
+                <div class="header-badge">JEU DE MOTS</div>
+            </header>
             <div class="boxInt">
                 <div id="intPrePartie">
-                    <div id="titreFormulaire">Wordeul</div>
-                    <div class="sousTitres">But du jeu</div>
+                    <div class="intro-copy">
+                        <div id="titreFormulaire">Préparez votre partie</div>
+                        <div class="sousTitres">Comment jouer</div>
+                    </div>
                     <div class="textForm">
-                        <div>Déterminer un mot de six lettres</div>
-                        <div><p>Le joueur donne un mot et confirme avec Enter. Si le mot se trouve 
-                            au dictionnaire, l'ordinnateur accepte le mot et
-                            indique quelles lettres sont correctes
-                        </p></div>
-                        <ul>
-                            <li>celles correctement placées sont en vert;</li>
-                            <li>celles présentes mais mal placées sont en jaune;</li>
-                            <li>les autres sont absentes.</li>
+                        <p>Proposez un mot valide puis appuyez sur Entrée. Les couleurs vous indiquent la proximité du mot à trouver.</p>
+                        <ul class="rule-list">
+                            <li><span class="rule-dot correct-dot"></span>Bien placée</li>
+                            <li><span class="rule-dot present-dot"></span>Présente, ailleurs</li>
+                            <li><span class="rule-dot absent-dot"></span>Absente du mot</li>
                         </ul>
                     </div>
                     <form id="gameForm">
-                        <label for="nTentatives">Nombre de tentatives :</label>
-                        <input type="number" id="nTentatives" name="nTentatives" min="2" max="8" required><br>
-                        <label for="motCible">Mot cible :</label>
-                        <div class="inputContainer">
-                            <input type="password" id="motCible" name="motCible" minlength="6" maxlength="6" required>
-                            <button type="button" id="randomBtn">Choisir un mot aléatoire</button>
-                        </div><br>
-                        <button type="submit" id="btnGo">Go</button>
+                        <div class="form-field">
+                            <label for="nTentatives">Nombre de tentatives</label>
+                            <input type="number" id="nTentatives" name="nTentatives" min="2" max="8" required>
+                        </div>
+                        <div class="form-field">
+                            <label for="motCible">Mot à deviner</label>
+                            <div class="inputContainer">
+                                <input type="password" id="motCible" name="motCible" minlength="6" maxlength="6" required autocomplete="off">
+                                <button type="button" id="randomBtn">Mot aléatoire</button>
+                            </div>
+                        </div>
+                        <button type="submit" id="btnGo">Commencer la partie <span aria-hidden="true">→</span></button>
                     </form>
                 </div>
             </div>
@@ -60,7 +72,7 @@
     
     <div class="modal">
         <div class="modal-dialog">
-            <div id="result">Vous avez gagné</div>
+            <div id="result" role="status" aria-live="polite">Vous avez gagné</div>
             <div id="libelle">Vous avez trouvé le mot</div>
             <div id="btn"><button type="submit" id="closeBtn">Fermer</button></div>
         </div>

@@ -1,124 +1,193 @@
 
-html, 
-body {
-    margin: 0;
-    height: 100vh;
-
-}
-
 #game {
-    position: relative;
     display: flex;
-    border: 5px solid var(--primary-color);
     flex-direction: column;
+    gap: 6px;
+    width: fit-content;
+    max-width: 100%;
+    padding: 9px;
+    border: 1px solid rgba(165, 175, 191, 0.15);
+    border-radius: 17px;
+    background: rgba(25, 31, 43, 0.76);
+    box-shadow: 0 14px 38px rgba(0, 0, 0, 0.2);
     user-select: none;
-    gap: 4px;
     visibility: hidden;
-
-    
 }
-
 
 .row {
     display: flex;
-    gap: 2px;
-    
+    gap: 6px;
 }
 
 .tile {
-    position: relative;
     display: flex;
-    width: 70px;
-    height: 70px;
-    border: 1px solid black;
-    border-radius: 8px;
-    font-size: 2em;
-    text-align: center;
+    flex: 0 0 var(--tile-size, clamp(40px, 11vw, 58px));
+    width: var(--tile-size, clamp(40px, 11vw, 58px));
+    height: var(--tile-size, clamp(40px, 11vw, 58px));
     align-items: center;
-    justify-content: space-around;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: var(--primary-color);
+    justify-content: center;
+    border: 2px solid #384457;
+    border-radius: 11px;
+    color: var(--color-text);
+    background: linear-gradient(145deg, #202938, #1a222f);
+    font-size: clamp(1.35rem, 6vw, 1.8rem);
+    font-weight: 760;
+    line-height: 1;
+    transition: border-color 150ms ease, background 180ms ease, box-shadow 180ms ease, transform 150ms ease;
+}
+
+.tile:not(:empty) {
+    border-color: #7181b4;
+    background: #29344a;
+    box-shadow: 0 0 16px rgba(139, 156, 255, 0.1);
+    animation: tile-pop 150ms ease-out both;
 }
 
 .tile.correct {
-    background-color: green;
-    color: white;
-    text-shadow: 
-    -1px -1px 0 black,  
-     1px -1px 0 black,
-    -1px  1px 0 black,
-     1px  1px 0 black;
+    border-color: #62c891;
+    color: #fff;
+    background: linear-gradient(145deg, #47a979, #328760);
+    box-shadow: 0 0 18px rgba(70, 168, 120, 0.2);
+    animation: tile-flip 520ms ease both;
 }
 
 .tile.present {
-    background-color: yellow;
-    color: white;
-    text-shadow: 
-    -1px -1px 0 black,  
-     1px -1px 0 black,
-    -1px  1px 0 black,
-     1px  1px 0 black;
+    border-color: #ebc65f;
+    color: #fff;
+    background: linear-gradient(145deg, #d5aa45, #b88c2d);
+    box-shadow: 0 0 18px rgba(211, 169, 67, 0.17);
+    animation: tile-flip 520ms ease both;
 }
 
+.tile.absent {
+    border-color: #566174;
+    color: #f1f3f7;
+    background: linear-gradient(145deg, #505b6d, #3d4859);
+    animation: tile-flip 520ms ease both;
+}
+
+.row .tile:nth-child(1) { animation-delay: 0ms; }
+.row .tile:nth-child(2) { animation-delay: 70ms; }
+.row .tile:nth-child(3) { animation-delay: 140ms; }
+.row .tile:nth-child(4) { animation-delay: 210ms; }
+.row .tile:nth-child(5) { animation-delay: 280ms; }
+.row .tile:nth-child(6) { animation-delay: 350ms; }
+
 #keyboard {
-    display: flex;
-    width: 600px;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 5px;
-    
+    display: grid;
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+    gap: 8px clamp(3px, 0.9vw, 7px);
+    width: min(100%, 570px);
+}
+
+.keyboard-row {
+    display: contents;
 }
 
 .keyboard-key {
-    height: 50px;
-    width: 60px;
-    gap: 4px;
-    border-radius: 4px;
-    background-color: wheat;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    width: 100%;
+    height: clamp(43px, 8vw, 53px);
+    padding: 0 4px;
+    border: 1px solid rgba(165, 175, 191, 0.14);
+    border-radius: 10px;
+    color: #eef1f6;
+    background: linear-gradient(180deg, #303b4e, #273142);
+    box-shadow: 0 3px 0 #1b2330, 0 5px 12px rgba(0, 0, 0, 0.13);
     cursor: pointer;
-}
-
-.keyboard-key.enter {
-    width: auto;
+    font-size: clamp(0.72rem, 2.7vw, 0.88rem);
+    font-weight: 700;
+    transition: transform 100ms ease, filter 130ms ease, background 150ms ease, box-shadow 100ms ease;
 }
 
 .keyboard-key:hover {
-    background-color: var(--secondary-color);
+    filter: brightness(1.16);
+    transform: translateY(-1px);
 }
 
+.keyboard-key:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #1b2330;
+}
+
+.keyboard-key.enter,
 .keyboard-key.backspace {
-    width: auto;
+    grid-column: span 2;
+    font-size: clamp(0.55rem, 2vw, 0.7rem);
+    letter-spacing: -0.03em;
 }
 
 .keyboard-key.correct {
-    background-color: green;
-    color: white;
-    text-shadow: 
-    -1px -1px 0 black,  
-     1px -1px 0 black,
-    -1px  1px 0 black,
-     1px  1px 0 black;
+    border-color: rgba(98, 200, 145, 0.72);
+    background: linear-gradient(180deg, #3e9a6b, #327e59);
 }
 
 .keyboard-key.present {
-    background-color: yellow;
-    color: white;
-    text-shadow: 
-    -1px -1px 0 black,  
-     1px -1px 0 black,
-    -1px  1px 0 black,
-     1px  1px 0 black;
+    border-color: rgba(235, 198, 95, 0.72);
+    background: linear-gradient(180deg, #c79d3e, #a9822f);
+}
+
+.keyboard-key.absent {
+    border-color: #465164;
+    color: #b6bfcc;
+    background: linear-gradient(180deg, #4a5668, #3c4656);
 }
 
 #game.notFound {
-    animation: horizontal-shaking 0.5s;
+    animation: horizontal-shaking 420ms ease;
 }
 
 @keyframes horizontal-shaking {
-    0% { transform: translateX(0) }
-    25% { transform: translateX(5px) }
-    50% { transform: translateX(-5px) }
-    75% { transform: translateX(5px) }
-    100% { transform: translateX(0) }
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(5px); }
+    50% { transform: translateX(-5px); }
+    75% { transform: translateX(4px); }
+}
+
+@keyframes tile-pop {
+    0% { transform: scale(0.88); }
+    65% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
+@keyframes tile-flip {
+    0% { transform: rotateX(0); }
+    48% { transform: rotateX(90deg); }
+    100% { transform: rotateX(0); }
+}
+
+@media (max-width: 380px) {
+    #game {
+        gap: 4px;
+        padding: 6px;
+        border-radius: 14px;
     }
+
+    .row {
+        gap: 4px;
+    }
+
+    .tile {
+        --tile-size: clamp(39px, 11.5vw, 44px);
+        border-radius: 9px;
+    }
+
+    .keyboard-key {
+        border-radius: 8px;
+        padding: 0 2px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

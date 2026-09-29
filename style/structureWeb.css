@@ -1,60 +1,175 @@
-#container {
-    display: grid;
-    height: 100vh;
-    grid-template-columns: auto auto auto;
-    column-gap: 100px;
-    visibility: visible;
-    grid-template-areas:
-        "adLeft main adRight";
-    
+:root {
+    color-scheme: dark;
+    --color-bg: #10141d;
+    --color-surface: #191f2b;
+    --color-surface-raised: #202938;
+    --color-border: #303b4d;
+    --color-text: #f4f6fa;
+    --color-muted: #a5afbf;
+    --color-correct: #46a878;
+    --color-present: #d3a943;
+    --color-absent: #465164;
+    --color-accent: #8b9cff;
+    --color-accent-hover: #a5b1ff;
+    --shadow-card: 0 22px 60px rgba(0, 0, 0, 0.28);
+    --radius-card: 22px;
 }
 
+* {
+    box-sizing: border-box;
+}
 
-aside {
-    grid-area: adLeft;
+body {
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+    color: var(--color-text);
+    background:
+        radial-gradient(ellipse at 50% -20%, rgba(78, 99, 160, 0.2), transparent 54%),
+        linear-gradient(155deg, #151b27 0%, var(--color-bg) 54%, #0c1119 100%);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+#container {
+    width: min(100%, 900px);
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 32px 28px 48px;
+}
+
+#ad {
+    display: none;
 }
 
 main {
-    grid-area: main;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
 }
 
-
-
-
-#ad {
-    height: 100%;
-    background-image: url("../images/cafe.png");
-    color: white;
-    font-family: fantasy;
-    place-content: center;
-    font-size: 1.5em;
-
+.site-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: min(100%, 640px);
+    padding: 0 2px 20px;
+    border-bottom: 1px solid rgba(165, 175, 191, 0.16);
 }
 
-.boxInt {
-    grid-area: main;
-    width: 900px;
+.brand-mark {
+    display: grid;
+    flex: 0 0 46px;
+    width: 46px;
+    height: 46px;
+    place-items: center;
+    border: 1px solid rgba(139, 156, 255, 0.46);
+    border-radius: 15px;
+    color: #fff;
+    background: linear-gradient(145deg, #8999ff, #5969c5);
+    box-shadow: 0 8px 24px rgba(102, 120, 218, 0.25);
+    font-size: 1.35rem;
+    font-weight: 800;
+}
+
+.brand-copy h1,
+.brand-copy p {
+    margin: 0;
+}
+
+.brand-copy h1 {
+    letter-spacing: -0.045em;
+    font-size: 1.45rem;
+    line-height: 1.2;
+}
+
+.brand-copy p {
+    margin-top: 4px;
+    color: var(--color-muted);
+    font-size: 0.88rem;
+}
+
+.header-badge {
+    margin-left: auto;
+    padding: 7px 10px;
+    border: 1px solid rgba(165, 175, 191, 0.16);
+    border-radius: 999px;
+    color: var(--color-muted);
+    background: rgba(255, 255, 255, 0.035);
+    font-size: 0.64rem;
+    font-weight: 750;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+}
+
+.boxInt,
+.boxGame {
+    width: min(100%, 640px);
 }
 
 .boxGame {
     display: flex;
-    position: relative;
-    grid-area: main;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    gap: 20px;
-    top: 100px;
+    gap: 19px;
 }
 
-#ad.right {
-    grid-area: adRight;
+button,
+input {
+    font: inherit;
 }
 
-.adText {
-    left: 10px;
+button {
+    -webkit-tap-highlight-color: transparent;
 }
 
-.adText2 {
-    left: 25px;
+button:focus-visible,
+input:focus-visible {
+    outline: 3px solid rgba(139, 156, 255, 0.75);
+    outline-offset: 3px;
+}
+
+@media (max-width: 540px) {
+    #container {
+        padding: 22px 14px 32px;
+    }
+
+    main {
+        gap: 23px;
+    }
+
+    .site-header {
+        gap: 11px;
+        padding-bottom: 17px;
+    }
+
+    .brand-mark {
+        flex-basis: 42px;
+        width: 42px;
+        height: 42px;
+        border-radius: 13px;
+    }
+
+    .brand-copy h1 {
+        font-size: 1.28rem;
+    }
+
+    .brand-copy p {
+        max-width: 205px;
+        font-size: 0.76rem;
+    }
+
+    .header-badge {
+        padding: 6px 8px;
+        font-size: 0.56rem;
+    }
+}
+
+@media (max-width: 370px) {
+    .header-badge {
+        display: none;
+    }
 }
